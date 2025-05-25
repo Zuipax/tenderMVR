@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Тендер Симулатор</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 50px auto; text-align: center; }
+    input, button { padding: 10px; margin: 10px; width: 90%; }
+    .result { font-weight: bold; margin-top: 20px; font-size: 1.3em; }
+  </style>
+</head>
+<body>
+  <h1>Тендер Симулатор 💸</h1>
+  <p>Провери дали и ти можеш да добиеш тендер од МВР!</p>
+  <input id="name" placeholder="Име на фирма"><br>
+  <input id="employees" type="number" placeholder="Број на вработени"><br>
+  <input id="days" type="number" placeholder="Колку дена постои фирмата"><br>
+  <button onclick="calculate()">Провери шанси</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      let name = document.getElementById('name').value;
+      let employees = parseInt(document.getElementById('employees').value);
+      let days = parseInt(document.getElementById('days').value);
+
+      let chance = 100 - (employees * 10) - (days * 1.5);
+      if (chance > 99) chance = 99;
+      if (chance < 3) chance = 3;
+
+      document.getElementById('result').innerHTML =
+        `Фирма: <b>${name}</b><br>Шанси за тендер: <b>${chance.toFixed(1)}%</b><br>` +
+        (chance > 80 ? "🎉 Честитки! Очигледно имате веза!" :
+         chance > 50 ? "🤝 Имате потенцијал – фалат ви само 'контакти'." :
+         "❌ Немате шанси. Пробајте да основате нова фирма и намалете вработени.");
+    }
+  </script>
+</body>
+</html>
